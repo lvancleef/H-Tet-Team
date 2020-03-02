@@ -1,9 +1,5 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/TileScene.unity
-=======
-- path: Assets/Scenes/Main.unity
->>>>>>> cdfd6de988334b90f96c86ecbcb5186d61fb08fd
   isLoaded: 1
   isActive: 1
   isSubScene: 0
