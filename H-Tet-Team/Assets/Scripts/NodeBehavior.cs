@@ -6,6 +6,7 @@ public class NodeBehavior : MonoBehaviour
 {
     SpriteRenderer render;
     BoxCollider2D collider;
+    Collider2D target;
     Color transparent;
     Color white;
     Color blue;
@@ -44,17 +45,33 @@ public class NodeBehavior : MonoBehaviour
             render.color = blue;
         }
 	
-	RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector2.up);
-	if(hit.collider != null){
-		Debug.Log("ping!");
+        detectNeighbors();
 
-		if(render.color == hit.getColor()){
-			Debug.Log("Color PIng!");
-		}
 	}
-    }
 
-    public Color getColor(){
-	return render.color;
+	private void detectNeighbors(){
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(0, 2, 0), Vector2.up);
+
+        detectHit(hit, "above");
+
+        hit = Physics2D.Raycast(transform.position + new Vector3(0, -2, 0), -Vector2.up);
+
+        detectHit(hit, "below");
+
+        hit = Physics2D.Raycast(transform.position + new Vector3(2, 0, 0), Vector2.right);
+
+        detectHit(hit, "right");
+
+        hit = Physics2D.Raycast(transform.position + new Vector3(-2, 0, 0), -Vector2.right);
+
+        detectHit(hit, "left");
+
+    }
+    private void detectHit(RaycastHit2D hit, string direction){
+        if(hit.collider != null){
+            Debug.Log("ping " + direction + "!" + hit.collider);
+
+            target = hit.collider;
+        }
     }
 }
